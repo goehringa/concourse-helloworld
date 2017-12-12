@@ -5,6 +5,14 @@ resources:
     uri: https://github.com/goehringa/helloworld
     branch: master
 
+- name: helloworld-docker-image
+  type: docker-image
+  source:
+    email: {{docker-hub-email}}
+    username: {{docker-hub-username}}
+    password: {{docker-hub-password}}
+    repository: {{docker-hub-image-helloworld}}
+
 jobs:
 - name: test-app
   plan:
@@ -12,3 +20,10 @@ jobs:
     trigger: true
   - task: tests
     file: helloworld/build.yml
+
+- name: publish-container
+  plan:
+  - get: helloworld
+  - put: helloworld-docker-image
+    params:
+      build: helloworld/docker
