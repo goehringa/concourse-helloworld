@@ -1,0 +1,115 @@
+file:
+  /data/helloworld.py:
+    exists: true
+    mode: "0644"
+    size: 1401
+    owner: root
+    group: root
+    filetype: file
+  /data/requirements.txt:
+    exists: true
+    mode: "0644"
+    size: 6
+    owner: root
+    group: root
+    filetype: file
+package:
+  python:
+    installed: true
+    versions:
+    - 2.7.5
+  python2-pip:
+    installed: true
+    versions:
+    - 8.1.2
+port:
+  tcp:8080:
+    listening: true
+    ip:
+    - 0.0.0.0
+command:
+  pip list:
+    exit-status: 0
+    stdout:
+    - Flask (0.12.2)
+process:
+  python:
+    running: true
+http:
+  http://localhost:8080/:
+    status: 200
+    allow-insecure: false
+    no-follow-redirects: false
+    timeout: 5000
+    body:
+    - hello world
+  http://localhost:8080/?reversed=true:
+    status: 200
+    allow-insecure: false
+    no-follow-redirects: false
+    timeout: 5000
+    body:
+    - dlrow olleh
+  http://localhost:8080/?uppercase=true:
+    status: 200
+    allow-insecure: false
+    no-follow-redirects: false
+    timeout: 5000
+    body:
+    - HELLO
+  http://localhost:8080/?uppercase=true&reversed=true:
+    status: 200
+    allow-insecure: false
+    no-follow-redirects: false
+    timeout: 5000
+    body:
+    - DLROW OLLEH
+  http://localhost:8080/hello:
+    status: 200
+    allow-insecure: false
+    no-follow-redirects: false
+    timeout: 5000
+    body:
+    - hello
+  http://localhost:8080/hello?reversed=true:
+    status: 200
+    allow-insecure: false
+    no-follow-redirects: false
+    timeout: 5000
+    body:
+    - olleh
+  http://localhost:8080/hello?uppercase=true&reversed=true:
+    status: 200
+    allow-insecure: false
+    no-follow-redirects: false
+    timeout: 5000
+    body:
+    - OLLEH
+  http://localhost:8080/world:
+    status: 200
+    allow-insecure: false
+    no-follow-redirects: false
+    timeout: 5000
+    body:
+    - world
+  http://localhost:8080/world?reversed=true:
+    status: 200
+    allow-insecure: false
+    no-follow-redirects: false
+    timeout: 5000
+    body:
+    - dlrow
+  http://localhost:8080/world?uppercase=true:
+    status: 200
+    allow-insecure: false
+    no-follow-redirects: false
+    timeout: 5000
+    body:
+    - WORLD
+  http://localhost:8080/world?uppercase=true&reversed=true:
+    status: 200
+    allow-insecure: false
+    no-follow-redirects: false
+    timeout: 5000
+    body:
+    - DLROW
