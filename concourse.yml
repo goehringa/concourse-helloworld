@@ -1,12 +1,14 @@
-platform: linux
+resources:
+- name: helloworld
+  type: git
+  source:
+    uri: https://github.com/goehringa/helloworld
+    branch: master
 
-image_resource:
-  type: docker-image
-  source: 
-    repository: centos
-
-inputs:
-- name: gannett
-
-run:
-  path: ./gannett/ci/test.sh
+jobs:
+- name: test-app
+  plan:
+  - get: helloworld
+    trigger: true
+  - task: tests
+    file: helloworld/build.yml
