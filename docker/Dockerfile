@@ -6,9 +6,10 @@ RUN yum -y install python-pip; yum clean all
 
 WORKDIR /data
 
-ADD . /data
-
+COPY requirements.txt /data
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
+
+COPY helloworld.py /data
 
 EXPOSE 8080
 
