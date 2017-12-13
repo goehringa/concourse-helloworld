@@ -16,6 +16,7 @@ resources:
 jobs:
 - name: test-app
   serial: true
+  build_logs_to_retain: 5
   plan:
   - get: helloworld
     trigger: true
