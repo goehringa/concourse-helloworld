@@ -87,6 +87,11 @@ For example: `export CONCOURSE_EXTERNAL_URL=http://192.168.99.100:8080`
 Now, you can run `docker-compose up`
 
 You should be able to reach the concourse UI at your CONCOURSE_EXTERNAL_URL
+The default credentials in docker-compose.yml are:
+```
+username: concourse
+password: changeme
+```
 
 Create a credentials.yml file to store your docker hub credentials.
 
