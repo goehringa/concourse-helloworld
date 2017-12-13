@@ -12,5 +12,5 @@ curl \
 chmod +rx /usr/local/bin/dgoss
 
 pushd helloworld/docker
-  dgoss run -p 8080:8080 helloworld
+  /usr/local/bin/dgoss run -p 8080:8080 helloworld
 popd
