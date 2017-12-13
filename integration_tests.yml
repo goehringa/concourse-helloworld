@@ -23,4 +23,4 @@ run:
       PATH=$PATH:/usr/local/bin
       export GOSS_PATH=/usr/local/bin/goss
       cd helloworld/docker
-      dgoss run -d -p 8080:8080 agoehring/helloworld
+      /urs/local/bin/dgoss run -d -p 8080:8080 agoehring/helloworld
