@@ -2,14 +2,12 @@ file:
   /data/helloworld.py:
     exists: true
     mode: "0644"
-    size: 1401
     owner: flask
     group: flask
     filetype: file
   /data/requirements.txt:
     exists: true
     mode: "0644"
-    size: 6
     owner: flask
     group: flask
     filetype: file
