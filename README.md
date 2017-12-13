@@ -1,12 +1,14 @@
 ## helloworld HTTP server
-FLask Http server accepts three endpoints that return plain-text responses
-* GET / responds with "hello world"
-* GET /hello responds with "hello"
-* GET /world respond with "world
+Flask HTTP server accepts three endpoints that return plain-text responses
+```
+GET / responds with "hello world"
+GET /hello responds with "hello"
+GET /world responds with "world
+```
 
-Each endpoint also acceps the following query parameters
+Each endpoint also accepts the following query parameters
 * uppercase, which if true returns the string but capitalized, e.g. HELLO WORLD
-* reversed, whichif true returns the reverse of the string, e.g. dlrow olleh
+* reversed, which if true returns the reverse of the string, e.g. dlrow olleh
 
 To run this server locally:
 ```
@@ -33,15 +35,29 @@ docker build -t helloworld .
 Now, you can run the container with 
 `docker run -p 8080:8080 helloworld`
 
-You can now reach your server at http://0.0.0.0:8080/
+You can now reach your container at http://localhost:8080
 
 ## Upload image to docker hub
-Log into docker hub `docker login`
+(https://hub.docker.com/)
+
+With docker running, log into docker hub `docker login`
 
 Publish the image `docker push username/helloworld`
 
 You can now pull your docker image and run the container on any machine
 that has docker installed
+
+
+## Dgoss Container Tests
+(https://github.com/aelsabbahy/goss/tree/master/extras/dgoss)
+
+Dgoss is used to run the container tests in `docker/goss.yaml`
+
+To run the container tests:
+```
+cd docker
+dgoss run -p 8080:8080 username/helloworld
+```
 
 ## Concourse Continuous Integration
 (https://concourse.ci)
@@ -51,7 +67,7 @@ The docker-compose.yml file spins up three containers
 * Concourse-web for the Web UI, API, and pipeline scheduling
 * Concourse-worker for running containers
 
-Before you can run docker-compose generate the necessary keys
+Before you can run docker-compose generate the necessary keys and add them to your .gitignore file
 ```
 mkdir -p keys/web keys/worker
 
@@ -66,16 +82,18 @@ cp ./keys/web/tsa_host_key.pub ./keys/worker
 
 Set CONCOURSE_EXTERNAL_URL in docker-compose.yml to the external IP of your concourse node
 
-for example: `export CONCOURSE_EXTERNAL_URL=http://192.168.99.100:8080`
+For example: `export CONCOURSE_EXTERNAL_URL=http://192.168.99.100:8080`
 
 Now, you can run `docker-compose up`
 
 You should be able to reach the concourse UI at your CONCOURSE_EXTERNAL_URL
 
-Create a credentials.yml file to store your docker hub credentials
-The github-token is necessary to for concourse to send status updates to your repository
+Create a credentials.yml file to store your docker hub credentials.
 
-Do not check this into git as it has your credentials
+The github-token is necessary to for concourse to send status updates to your repository.
+
+Add credentials.yml to your .gitignore file
+
 ```
 docker-hub-email: EMAIL
 docker-hub-username: USERNAME
@@ -94,7 +112,7 @@ This will push your pipeline defined in concourse.yml to concourse
 Your pipeline will:
 1. Trigger when a push is made to the master branch of your repository
 2. Fetch the code from your github repository
-3. Run the tests for the flask http server
+3. Run the tests for the flask HTTP server
 4. Build a docker image and push it to dockerhub
-5. Run container tests on your image
+5. Run dgoss container tests on your image
 6. Push a build status to github, which you can see under commits

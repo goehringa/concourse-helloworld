@@ -20,12 +20,6 @@ resources:
     password: {{docker-hub-password}}
     repository: {{docker-hub-image-helloworld}}
 
-- name: repo
-  type: git
-  source:
-    uri: https://github.com/goehringa/helloworld
-    branch: master
-
 - name: repo-status
   type: github-status
   source:
@@ -33,12 +27,11 @@ resources:
     access_token: {{github-token}}
 
 jobs:
-- name: test-app
+- name: test-flask-http-server
   serial: true
   build_logs_to_retain: 5
   plan:
   - get: helloworld
-  - get: repo
     trigger: true
   - put: repo-status
     params: {state: pending, commit: repo}
