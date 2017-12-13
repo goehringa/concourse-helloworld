@@ -44,8 +44,15 @@ jobs:
     params: {state: pending, commit: repo}
   - task: tests
     file: helloworld/build.yml
+    on_failure:
+      put: repo-status
+      params: {state: failure, commit: repo}
   - put: helloworld-docker-image
     params:
       build: helloworld/docker
   - task: container-tests
     file: helloworld/integration_tests.yml
+    on_failure:
+      put: repo-status
+      params: {state: failure, commit: repo}
+
