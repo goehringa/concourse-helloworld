@@ -3,15 +3,15 @@ file:
     exists: true
     mode: "0644"
     size: 1401
-    owner: root
-    group: root
+    owner: flask
+    group: flask
     filetype: file
   /data/requirements.txt:
     exists: true
     mode: "0644"
     size: 6
-    owner: root
-    group: root
+    owner: flask
+    group: flask
     filetype: file
 package:
   python:
@@ -32,6 +32,7 @@ command:
     exit-status: 0
     stdout:
     - Flask (0.12.2)
+    timeout: 10000
 process:
   python:
     running: true
