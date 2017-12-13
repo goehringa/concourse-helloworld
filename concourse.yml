@@ -56,4 +56,5 @@ jobs:
     on_failure:
       put: repo-status
       params: {state: failure, commit: repo}
-
+  - put: repo-status
+    params: {state: success, commit: repo}
