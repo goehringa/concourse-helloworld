@@ -7,16 +7,12 @@ RUN yum install -y python-pip
 
 WORKDIR /data
 
-RUN useradd -ms /bin/bash flask
-
 COPY requirements.txt /data
 RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
 COPY helloworld.py /data
 
-RUN chown -R flask:flask /data
-
 EXPOSE 8080
 
-USER node
+USER flask
 CMD ["python", "helloworld.py"]
