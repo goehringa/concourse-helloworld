@@ -24,6 +24,7 @@ curl \
 chmod +rx /usr/local/bin/dgoss
 
 PATH=$PATH:/usr/local/bin
+export GOSS_PATH=/usr/local/bin/goss
 pushd helloworld/docker
   dgoss run -d -p 8080:8080 agoehring/helloworld
 popd
