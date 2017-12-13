@@ -43,7 +43,9 @@ Publish the image `docker push username/helloworld`
 You can now pull your docker image and run the container on any machine
 that has docker installed
 
-## Continuous Integration
+## Concourse Continuous Integration
+(https://concourse.ci)
+
 The docker-compose.yml file spins up three containers
 * Concourse-db for storing pipeline data and build logs
 * Concourse-web for the Web UI, API, and pipeline scheduling
@@ -68,13 +70,18 @@ for example: `export CONCOURSE_EXTERNAL_URL=http://192.168.99.100:8080`
 
 Now, you can run `docker-compose up`
 
+You should be able to reach the concourse UI at your CONCOURSE_EXTERNAL_URL
+
 Create a credentials.yml file to store your docker hub credentials
+The github-token is necessary to for concourse to send status updates to your repository
+
 Do not check this into git as it has your credentials
 ```
 docker-hub-email: EMAIL
 docker-hub-username: USERNAME
 docker-hub-password: PASSWORD
 docker-hub-image-helloworld: USERNAME/docker-image
+github-token: TOKEN
 ```
 
 To deploy your pipeline run
@@ -85,8 +92,9 @@ fly -t ci set-pipeline -p helloworld -c concourse.yml --load-vars-from credentia
 This will push your pipeline defined in concourse.yml to concourse
 
 Your pipeline will:
-1. Fetch the code from your github repository
-2. Run the tests for the flask http server
-3. Build a docker image and push it to dockerhub
-4. Run container tests on your image
-5. Push a commit status to github
+1. Trigger when a push is made to the master branch of your repository
+2. Fetch the code from your github repository
+3. Run the tests for the flask http server
+4. Build a docker image and push it to dockerhub
+5. Run container tests on your image
+6. Push a build status to github, which you can see under commits
