@@ -2,9 +2,9 @@ platform: linux
 
 image_resource:
   type: docker-image
-  privileged: true
   source:
     repository: centos
+    privileged: true
 
 inputs:
 - name: helloworld
