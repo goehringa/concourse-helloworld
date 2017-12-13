@@ -30,7 +30,7 @@ resources:
   type: github-status
   source:
     repository: goehringa/helloworld
-    access_token: 9fe84e187f927e59491b439b3c147c372bdf2ac2
+    access_token: {{github-token}}
 
 jobs:
 - name: test-app
