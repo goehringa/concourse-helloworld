@@ -25,6 +25,8 @@ chmod +rx /usr/local/bin/dgoss
 
 PATH=$PATH:/usr/local/bin
 pushd helloworld/docker
-  sudo systemctl start docker
+  whoami
+  cat /etc/os-release
+  systemctl start docker
   dgoss run -p 8080:8080 helloworld
 popd
