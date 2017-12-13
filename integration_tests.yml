@@ -20,7 +20,8 @@ run:
         -L https://raw.githubusercontent.com/aelsabbahy/goss/master/extras/dgoss/dgoss \
         -o /usr/local/bin/dgoss
       chmod +rx /usr/local/bin/dgoss
-      PATH=$PATH:/usr/local/bin
+      apk --update add bash
+      export PATH=$PATH:/usr/local/bin
       export GOSS_PATH=/usr/local/bin/goss
       cd helloworld/docker
       /usr/local/bin/dgoss run -d -p 8080:8080 agoehring/helloworld
