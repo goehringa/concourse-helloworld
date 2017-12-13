@@ -83,3 +83,10 @@ fly -t ci login -c http://your_concourse_url
 fly -t ci set-pipeline -p helloworld -c concourse.yml --load-vars-from credentials.yml
 ```
 This will push your pipeline defined in concourse.yml to concourse
+
+Your pipeline will:
+1. Fetch the code from your github repository
+2. Run the tests for the flask http server
+3. Build a docker image and push it to dockerhub
+4. Run container tests on your image
+5. Push a commit status to github
