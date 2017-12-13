@@ -4,7 +4,6 @@ image_resource:
   type: docker-image
   source:
     repository: centos
-    privileged: true
 
 inputs:
 - name: helloworld

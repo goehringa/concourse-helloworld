@@ -51,6 +51,7 @@ jobs:
     params:
       build: helloworld/docker
   - task: container-tests
+    privileged: true
     file: helloworld/integration_tests.yml
     on_failure:
       put: repo-status
