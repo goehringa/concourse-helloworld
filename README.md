@@ -1,5 +1,5 @@
 ## helloworld HTTP server
-FLask Http server accepts three endpoints that return plain-text
+FLask Http server accepts three endpoints that return plain-text responses
 * GET / responds with "hello world"
 * GET /hello responds with "hello"
 * GET /world respond with "world
