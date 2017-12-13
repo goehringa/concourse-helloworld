@@ -2,6 +2,7 @@
 
 set -e -x
 
+yum update -y && yum clean all
 yum install -y yum-utils \
   device-mapper-persistent-data \
   lvm2
@@ -11,19 +12,19 @@ yum-config-manager \
   https://download.docker.com/linux/centos/docker-ce.repo
 
 yum install -y docker-ce
-systemctl start docker
 
 curl \
-  -L https://github.com/aelsabbahy/goss/releases/download/_VERSION_/goss-linux-amd64 \
+  -L https://github.com/aelsabbahy/goss/releases/download/v0.3.5/goss-linux-amd64 \
   -o /usr/local/bin/goss
 
 chmod +rx /usr/local/bin/goss
 curl \
-  -L https://raw.githubusercontent.com/aelsabbahy/goss/_VERSION_/extras/dgoss/dgoss \
+  -L https://raw.githubusercontent.com/aelsabbahy/goss/master/extras/dgoss/dgoss \
   -o /usr/local/bin/dgoss
-
 chmod +rx /usr/local/bin/dgoss
 
+PATH=$PATH:/usr/local/bin
 pushd helloworld/docker
-  /usr/local/bin/dgoss run -p 8080:8080 helloworld
+  sudo systemctl start docker
+  dgoss run -p 8080:8080 helloworld
 popd
