@@ -12,3 +12,16 @@ run:
     - |
       source /docker-lib.sh
       start_docker
+      curl \
+        -L https://github.com/aelsabbahy/goss/releases/download/v0.3.5/goss-linux-amd64 \
+        -o /usr/local/bin/goss
+      chmod +rx /usr/local/bin/goss
+      curl \
+        -L https://raw.githubusercontent.com/aelsabbahy/goss/master/extras/dgoss/dgoss \
+        -o /usr/local/bin/dgoss
+      chmod +rx /usr/local/bin/dgoss
+      PATH=$PATH:/usr/local/bin
+      export GOSS_PATH=/usr/local/bin/goss
+      pushd helloworld/docker
+        dgoss run -d -p 8080:8080 agoehring/helloworld
+      popd
