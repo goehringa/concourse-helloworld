@@ -21,12 +21,6 @@ jobs:
     trigger: true
   - task: tests
     file: helloworld/build.yml
-
-- name: publish-container
-  serial: true
-  plan:
-  - get: helloworld
-    trigger: true
   - put: helloworld-docker-image
     params:
       build: helloworld/docker
