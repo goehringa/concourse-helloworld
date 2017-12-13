@@ -1,3 +1,10 @@
+resource_types:
+- name: github-status
+  type: docker-image
+  source:
+    repository: dpb587/github-status-resource
+    tag: master
+
 resources:
 - name: helloworld
   type: git
@@ -13,13 +20,28 @@ resources:
     password: {{docker-hub-password}}
     repository: {{docker-hub-image-helloworld}}
 
+- name: repo
+  type: git
+  source:
+    uri: https://github.com/goehringa/helloworld
+    branch: master
+
+- name: repo-status
+  type: github-status
+  source:
+    repository: goehringa/helloworld
+    access_token: 9fe84e187f927e59491b439b3c147c372bdf2ac2
+
 jobs:
 - name: test-app
   serial: true
   build_logs_to_retain: 5
   plan:
   - get: helloworld
+  - get: repo
     trigger: true
+  - put: repo-status
+    params: {state: pending, commit: repo}
   - task: tests
     file: helloworld/build.yml
   - put: helloworld-docker-image
