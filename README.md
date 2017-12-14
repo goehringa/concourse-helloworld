@@ -17,6 +17,8 @@ pip install requirements.txt
 python helloworld.py
 ```
 
+You can reach your flask server at http://localhost:8080
+
 ## helloworld HTTP server tests
 Tests are in docker/helloworld_tests.py
 The test cases can be run with
